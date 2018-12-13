@@ -52,20 +52,20 @@ class HashMapBase(MapBase):
         self._b = randrange(p)
         self._p = p
 
-    def _hash_function(self, key):
-        hc = hash(key)
+    def _hash_function(self, k):
+        hc = hash(k)
         return ((self._a * hc + self._b) % self._p) % len(self._bkt_arr)
 
     def __len__(self):
         return self._size
 
-    def __getitem__(self, key):
-        bkt_idx = self._hash_function(key)
-        return self._bucket_getitem(bkt_idx, key)
+    def __getitem__(self, k):
+        bkt_idx = self._hash_function(k)
+        return self._bucket_getitem(bkt_idx, k)
 
-    def __setitem__(self, key, val):
-        bkt_idx = self._hash_function(key)
-        self._bucket_setitem(bkt_idx, key, val)
+    def __setitem__(self, k, v):
+        bkt_idx = self._hash_function(k)
+        self._bucket_setitem(bkt_idx, k, v)
 
         cur_cap = len(self._bkt_arr)
         load_fctr = self._size / cur_cap
@@ -73,9 +73,9 @@ class HashMapBase(MapBase):
         if load_fctr > 0.5:
             self._resize(2 * cur_cap - 1)
 
-    def __delitem__(self, key):
-        bkt_idx = self._hash_function(key)
-        self._bucket_delitem(bkt_idx, key)
+    def __delitem__(self, k):
+        bkt_idx = self._hash_function(k)
+        self._bucket_delitem(bkt_idx, k)
         self._size -= 1
 
     def _resize(self, new_cap):
@@ -91,11 +91,11 @@ class HashMapBase(MapBase):
         for (k, v) in old_arr:
             self[k] = v
 
-    def _bucket_getitem(self, bkt_idx, key):
+    def _bucket_getitem(self, bkt_idx, k):
         raise NotImplementedError
 
-    def _bucket_setitem(self, bkt_idx, key, val):
+    def _bucket_setitem(self, bkt_idx, k, v):
         raise NotImplementedError
 
-    def _bucket_delitem(self, bkt_idx, key):
+    def _bucket_delitem(self, bkt_idx, k):
         raise NotImplementedError
