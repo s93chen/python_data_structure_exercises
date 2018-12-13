@@ -10,7 +10,7 @@ class ProbeHashMap(HashMapBase):
     def _is_available(self, bkt_idx):
         ''' check if slot is available '''
 
-        return (self._bkt_arr[bkt_idx] is None) or
+        return (self._bkt_arr[bkt_idx] is None) or \
                (self._bkt_arr[bkt_idx] is ProbeHashMap._AVAIL)
 
     def _find_slot(self, bkt_idx, k):
@@ -29,7 +29,7 @@ class ProbeHashMap(HashMapBase):
             if self._is_available(bkt_idx):
                 if first_avail_slot is None:
                     first_avail_slot = bkt_idx
-                if self._bkt_arr(bkt_idx) is None:
+                if self._bkt_arr[bkt_idx] is None:
                     return (False, first_avail_slot)
 
             elif k == self._bkt_arr[bkt_idx]._key:
