@@ -33,6 +33,6 @@ class SimpleUnsortedMap(MapBase):
 
         raise KeyError("Key Error: " + repr(k))
 
-    def __iter__(key):
+    def __iter__(self):
         for item in self._table:
             yield item._key

@@ -31,5 +31,5 @@ class ChainHashMap(HashMapBase):
     def __iter__(self):
         for bkt in self._bkt_arr:
             if bkt is not None:
-                for key in bucket:
+                for key in bkt:
                     yield key
