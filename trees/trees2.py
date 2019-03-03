@@ -140,13 +140,9 @@ def remove(root, key):
     
     else:
         if not root.left:
-            temp = root.right
-            root = None
-            return temp
+            return root.right
         elif not root.right:
-            temp = root.left
-            root = None
-            return temp
+            return root.left
         
         # otherwise if root has 2 children:
         temp = find_min_successor(root.right)
